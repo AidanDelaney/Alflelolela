@@ -55,7 +55,8 @@
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
-      <maven.compiler.fork>true</maven.compiler.fork>
+        <maven.compiler.fork>true</maven.compiler.fork>
+        <maven.compiler.executable>${env.OPENSHIFT_WILDFLY_JDK8}/bin/javac</maven.compiler.executable>
     </properties>
 
     <dependencyManagement>
@@ -154,9 +155,6 @@
         <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
         <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
         <id>openshift</id>
-        <properties>
-          <jdk>${env.OPENSHIFT_WILDFLY_DIR}usr/lib/jvm/jdk1.8.0_05/</jdk>
-        </properties>
         <build>
           <finalName>wildfly8</finalName>
           <plugins>
