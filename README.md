@@ -1,3 +1,3 @@
-The OpenShift `jbossas` cartridge documentation can be found at:
+# Alflelolela: TemperatureSensor #
 
-https://github.com/openshift/origin-server/tree/master/cartridges/openshift-origin-cartridge-jbossas/README.md
+A simple web service that stores a global vlue.  This floating point value is returned on GET and can be updated by a POST.

@@ -2,13 +2,17 @@ package org.ontologyengineering.alflelolela;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.inject.*;
+
+import javax.ejb.EJB;
+
+import java.util.Optional;
+
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 
 @Path("/")
 public class TemperatureHandler {
-    @Inject
+    @EJB
     TemperatureService temperatureService;
 
     @GET
@@ -19,10 +23,14 @@ public class TemperatureHandler {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject getJSON() {
-        return Json.createObjectBuilder()
-                .add("temperature", "null")
-                .build();
+    public Temperature getJSON() {
+        Optional<Temperature> temp = temperatureService.getTemperature();
+
+        if(temp.isPresent()) {
+            return temp.get();
+        } else {
+            return null;
+        }
     }
 
     @GET
@@ -34,7 +42,9 @@ public class TemperatureHandler {
     @POST
     @Path("/{temperature}")
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject postJSON(@PathParam("temperature") Float temperature) {
+    public Temperature postJSON(@PathParam("temperature") Float temperature) {
+        temperatureService.setTemperature(temperature);
+        System.out.println(temperature);
         return getJSON();
     }
 }
