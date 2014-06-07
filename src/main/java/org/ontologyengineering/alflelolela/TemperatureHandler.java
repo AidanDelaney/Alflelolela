@@ -18,7 +18,7 @@ public class TemperatureHandler {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String getHTML() {
-        return "<html>The temperature</html>";
+        return "<html>The temperature is  " + temperatureService.getTemperature().get() + "</html>";
     }
 
     @GET
